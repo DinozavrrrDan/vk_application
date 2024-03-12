@@ -7,3 +7,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  security:
+      user:
+        name: "admin"
+        password: "admin"
+        roles: "ROLE_ADMIN"
