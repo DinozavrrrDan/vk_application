@@ -51,7 +51,13 @@ jobs:
       - name: Run tests with Maven
         run: mvn -B test --file pom.xml
 
-      - name: Generate JaCoCo Badge
-        uses: cicirello/jacoco-badge-generator@v2
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.6.1
         with:
-          jacoco-csv-file: "**/jacoco.csv"
+          paths: |
+            ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
+            ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
