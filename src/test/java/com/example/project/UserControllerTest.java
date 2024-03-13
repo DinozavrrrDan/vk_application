@@ -49,7 +49,7 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetUsers() throws Exception {
+    public void testGetUsers_Success() throws Exception {
         User[] users = {getTestUser(), getTestUser()};
         when(userService.getUsers()).thenReturn(users);
 
@@ -61,7 +61,7 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetUser() throws Exception {
+    public void testGetUser_Success() throws Exception {
         String userId = "id";
         User user = getTestUser();
         when(userService.getUser(userId)).thenReturn(user);
@@ -73,7 +73,7 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetUserComments() throws Exception {
+    public void testGetUserComments_Success() throws Exception {
         String userId = "id";
         Comment[] comments = {new Comment("1", "2", "name1", "email", "body1"), new Comment("1", "3", "name2", "email2", "body2")};
         when(userService.getUserComments(userId)).thenReturn(comments);
@@ -87,7 +87,7 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testCreateUser() throws Exception {
+    public void testCreateUser_Success() throws Exception {
         User user = getTestUser();
         when(userService.createUser(any())).thenReturn(user);
         String json = objectMapper.writeValueAsString(user);
@@ -102,7 +102,7 @@ public class UserControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testUpdateUser() throws Exception {
+    public void testUpdateUser_Success() throws Exception {
         User updatedUser = getTestUser();
         String userId = "id";
         when(userService.updateUser(any(), any())).thenReturn(updatedUser);

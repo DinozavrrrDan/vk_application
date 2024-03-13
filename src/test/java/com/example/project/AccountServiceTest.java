@@ -48,7 +48,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testCreateAccount() throws BusinessException {
+    public void testCreateAccount_Success() throws BusinessException {
         Account account = getTestAccount();
         when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
         when(accountRepository.save(Mockito.any(Account.class))).thenReturn(account);
@@ -59,7 +59,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testCreateAccount_ThrowsException(){
+    public void testCreateAccount_ThrowsBusinessException(){
         Account account = getTestAccount();
         when(accountRepository.findByName(any())).thenReturn(Optional.of(account));
 
@@ -70,7 +70,7 @@ public class AccountServiceTest {
 
 
     @Test
-    public void testGetAccounts() {
+    public void testGetAccounts_Success() {
         List<Account> accounts = new ArrayList<>();
         accounts.add(getTestAccount());
         accounts.add(getTestAccount());
@@ -82,7 +82,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testDeleteAccount_ThrowsException() {
+    public void testDeleteAccount_ThrowsBusinessException() {
         when(securityContext.getAuthentication()).thenReturn(authentication);
         when(authentication.getName()).thenReturn("testUser");
         Account testAccount = getTestAccount();

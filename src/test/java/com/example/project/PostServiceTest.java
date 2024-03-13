@@ -47,7 +47,7 @@ public class PostServiceTest {
     }
 
     @Test
-    public void testCreateUser_Failure() {
+    public void testCreateUser_ThrowsBusinessException() {
         Post post = getTestPost();
         when(restTemplate.exchange(Mockito.eq(JSONPLACEHOLDER_POSTS_URL), Mockito.eq(HttpMethod.POST),
                 Mockito.any(HttpEntity.class), Mockito.eq(Post.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
@@ -69,7 +69,7 @@ public class PostServiceTest {
     }
 
     @Test
-    public void testGetPost_Failure() {
+    public void testGetPost_ThrowsBusinessException() {
         String postId = "2";
         when(restTemplate.getForEntity(Mockito.eq(JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + postId),
                 Mockito.eq(Post.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
