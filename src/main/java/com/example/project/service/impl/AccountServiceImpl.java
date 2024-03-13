@@ -20,7 +20,10 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
 
     @Override
-    public Account createAccount(Account account) {
+    public Account createAccount(Account account) throws BusinessException {
+        if (accountRepository.findByName(account.getName()).isPresent()){
+            throw new BusinessException("Account already exists");
+        }
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         return accountRepository.save(account);
     }
