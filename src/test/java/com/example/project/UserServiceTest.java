@@ -52,7 +52,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreateUser_Failure() {
+    public void testCreateUser_ThrowsBusinessException() {
         User person = getTestUser();
 
         when(restTemplate.exchange(Mockito.eq(JSONPLACEHOLDER_USERS_URL), Mockito.eq(HttpMethod.POST),
@@ -75,7 +75,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUser_Failure() {
+    public void testGetUser_ThrowsBusinessException() {
         String userId = "2";
         when(restTemplate.getForEntity(Mockito.eq(JSONPLACEHOLDER_USERS_URL_WITH_SLASH + userId),
                 Mockito.eq(User.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
@@ -105,7 +105,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUserComments_Failure() {
+    public void testGetUserComments_ThrowsBusinessException() {
         String userId = "2";
         when(restTemplate.getForEntity(
                 Mockito.eq(JSONPLACEHOLDER_USERS_URL_WITH_SLASH + userId),
@@ -128,7 +128,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUsers_Failure() {
+    public void testGetUsers_ThrowsBusinessException() {
         when(restTemplate.getForEntity(Mockito.eq(JSONPLACEHOLDER_USERS_URL), Mockito.eq(User[].class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
         assertThrows(BusinessException.class, () -> {
@@ -155,7 +155,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUser_Failure() {
+    public void testUpdateUser_ThrowsBusinessException() {
         String userId = "2";
         User user = getTestUser();
         when(restTemplate.exchange(
@@ -171,7 +171,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUser_Success() {
         String userId = "1";
         userService.deleteUser(userId);
 

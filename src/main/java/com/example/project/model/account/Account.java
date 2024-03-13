@@ -1,13 +1,14 @@
 package com.example.project.model.account;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import static com.example.project.consts.TableConsts.ACCOUNT_TABLE_NAME;
+
 @Data
 @Entity
-@Table(name = "user_accounts")
+@Table(name = ACCOUNT_TABLE_NAME)
 @RequiredArgsConstructor
 public class Account {
     @Id

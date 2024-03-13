@@ -28,14 +28,14 @@ public class AuditServiceTests {
     }
 
     @Test
-    public void testSaveAuditLog() {
+    public void testSaveAuditLog_Success() {
         AuditLog auditLog = getTestAuditLog();
         auditService.save(auditLog);
         Mockito.verify(auditRepository, Mockito.times(1)).save(auditLog);
     }
 
     @Test
-    public void testGetAllAuditLogs() {
+    public void testGetAllAuditLogs_Success() {
         List<AuditLog> logs = new ArrayList<>();
         logs.add(getTestAuditLog());
         logs.add(getTestAuditLog());

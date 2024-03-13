@@ -1,7 +1,6 @@
 package com.example.project.model.comment;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 @Data

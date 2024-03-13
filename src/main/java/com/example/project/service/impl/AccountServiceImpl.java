@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.project.consts.WebConsts.YOU_CAN_T_DELETE_THE_ACCOUNT_YOU_LOGGED_IN_TO;
+import static com.example.project.consts.ExceptionConsts.ACCOUNT_ALREADY_EXISTS;
+import static com.example.project.consts.ExceptionConsts.YOU_CAN_T_DELETE_THE_ACCOUNT_YOU_LOGGED_IN_TO;
 
 @Service
 @AllArgsConstructor
@@ -21,8 +22,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account createAccount(Account account) throws BusinessException {
-        if (accountRepository.findByName(account.getName()).isPresent()){
-            throw new BusinessException("Account already exists");
+        if (accountRepository.findByName(account.getName()).isPresent()) {
+            throw new BusinessException(ACCOUNT_ALREADY_EXISTS);
         }
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         return accountRepository.save(account);

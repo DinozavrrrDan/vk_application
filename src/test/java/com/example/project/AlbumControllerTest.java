@@ -52,7 +52,7 @@ public class AlbumControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetAlbums() throws Exception {
+    public void testGetAlbums_Success() throws Exception {
         Album[] albums = {getTestAlbum(), getTestAlbum()};
         when(albumService.getAlbums()).thenReturn(albums);
 
@@ -64,7 +64,7 @@ public class AlbumControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetAlbum() throws Exception {
+    public void testGetAlbum_Success() throws Exception {
         String albumId = "id";
         Album album = getTestAlbum();
         when(albumService.getAlbum(albumId)).thenReturn(album);
@@ -76,7 +76,7 @@ public class AlbumControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetAlbumComments() throws Exception {
+    public void testGetAlbumComments_Success() throws Exception {
         String albumId = "id";
         Comment[] comments = {new Comment("1", "2", "name1", "email", "body1"), new Comment("1", "3", "name2", "email2", "body2")};
         when(albumService.getAlbumComments(albumId)).thenReturn(comments);
@@ -89,7 +89,7 @@ public class AlbumControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testPostAlbum() throws Exception {
+    public void testPostAlbum_Success() throws Exception {
         Album album = getTestAlbum();
         when(albumService.createAlbum(ArgumentMatchers.any())).thenReturn(album);
         String json = objectMapper.writeValueAsString(album);
@@ -104,7 +104,7 @@ public class AlbumControllerTest {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testUpdateAlbum() throws Exception {
+    public void testUpdateAlbum_Success() throws Exception {
         Album updatedAlbum = getTestAlbum();
         String albumId = "id";
         when(albumService.updateAlbum(any(), any())).thenReturn(updatedAlbum);

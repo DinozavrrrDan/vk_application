@@ -48,7 +48,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testCreateUser_Failure() {
+    public void testCreateUser_ThrowsBusinessException() {
            Album album = getTestAlbum();
         when(restTemplate.exchange(Mockito.eq(JSONPLACEHOLDER_ALBUMS_URL), Mockito.eq(HttpMethod.POST),
                 Mockito.any(HttpEntity.class), Mockito.eq(Album.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
@@ -70,7 +70,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testGetAlbum_Failure() {
+    public void testGetAlbum_ThrowsBusinessException() {
         String albumId = "2";
         when(restTemplate.getForEntity(Mockito.eq(JSONPLACEHOLDER_ALBUMS_URL_WITH_SLASH + albumId),
                 Mockito.eq(Album.class))).thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
@@ -99,7 +99,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testGetAlbumComments_Failure() {
+    public void testGetAlbumComments_ThrowsBusinessException() {
         String albumId = "2";
         when(restTemplate.getForEntity(
                 Mockito.eq(JSONPLACEHOLDER_ALBUMS_URL_WITH_SLASH + albumId),
@@ -122,7 +122,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testGetAlbums_Failure() {
+    public void testGetAlbums_ThrowsBusinessException() {
         when(restTemplate.getForEntity(Mockito.eq(JSONPLACEHOLDER_ALBUMS_URL), Mockito.eq(Album[].class)))
                 .thenThrow(new HttpClientErrorException(HttpStatus.NOT_FOUND));
         assertThrows(BusinessException.class, () -> {
@@ -148,7 +148,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testUpdateAlbum_Failure() {
+    public void testUpdateAlbum_ThrowsBusinessException() {
         String albumId = "2";
         Album album = getTestAlbum();
         when(restTemplate.exchange(
@@ -164,7 +164,7 @@ public class AlbumServiceTest {
     }
 
     @Test
-    public void testDeleteAlbum() {
+    public void testDeleteAlbum_Success() {
         String albumId = "1";
         albumService.deleteAlbum(albumId);
         String expectedUrl = JSONPLACEHOLDER_ALBUMS_URL_WITH_SLASH + albumId;

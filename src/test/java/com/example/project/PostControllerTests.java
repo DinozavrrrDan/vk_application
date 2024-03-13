@@ -43,7 +43,7 @@ public class PostControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetPosts() throws Exception {
+    public void testGetPosts_Success() throws Exception {
         Post[] posts = {getTestPost(), getTestPost()};
         when(postService.getPosts()).thenReturn(posts);
 
@@ -55,7 +55,7 @@ public class PostControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetPost() throws Exception {
+    public void testGetPost_Success() throws Exception {
         String postId = "id";
         Post post = getTestPost();
         when(postService.getPost(postId)).thenReturn(post);
@@ -67,7 +67,7 @@ public class PostControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetPostComments() throws Exception {
+    public void testGetPostComments_Success() throws Exception {
         String postId = "id";
         Comment[] comments = {new Comment("1", "2", "name1", "email", "body1"), new Comment("1", "3", "name2", "email2", "body2")};
         when(postService.getPostComments(postId)).thenReturn(comments);
@@ -80,7 +80,7 @@ public class PostControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testCreatePost() throws Exception {
+    public void testCreatePost_Success() throws Exception {
         Post post = getTestPost();
         when(postService.createPost(any())).thenReturn(post);
         String json = objectMapper.writeValueAsString(post);
@@ -95,7 +95,7 @@ public class PostControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testUpdateAlbum() throws Exception {
+    public void testUpdateAlbum_Success() throws Exception {
         Post updtedPost = getTestPost();
         String postId = "id";
         when(postService.updatePost(any(), any())).thenReturn(updtedPost);

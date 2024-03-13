@@ -35,7 +35,7 @@ public class AuditControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetAuditLogs() throws Exception {
+    public void testGetAuditLogs_Success() throws Exception {
         List<AuditLog> auditLogs = new ArrayList<>();
         auditLogs.add(getTestAuditLog());
         auditLogs.add(getTestAuditLog());

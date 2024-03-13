@@ -55,7 +55,7 @@ public class AccountControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testGetAccounts() throws Exception {
+    public void testGetAccounts_Success() throws Exception {
         List<Account> accounts = new ArrayList<>();
         accounts.add(getTestAccount());
         when(accountService.getAccounts()).thenReturn(accounts);
@@ -68,7 +68,7 @@ public class AccountControllerTests {
 
     @Test
     @WithMockUser(authorities = "ROLE_ADMIN")
-    public void testCreateAccount() throws Exception {
+    public void testCreateAccount_Success() throws Exception {
         Account account = getTestAccount();
         when(accountService.createAccount(any())).thenReturn(account);
         String json = objectMapper.writeValueAsString(account);

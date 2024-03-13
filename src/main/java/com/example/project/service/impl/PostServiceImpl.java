@@ -16,7 +16,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import static com.example.project.consts.WebConsts.ERROR_THEN_GET_RESPONSE;
+import static com.example.project.consts.CacheConsts.POST_CACHE;
+import static com.example.project.consts.CacheConsts.POSTS_CACHE;
+import static com.example.project.consts.CacheConsts.POST_COMMENTS_CACHE;
+import static com.example.project.consts.ExceptionConsts.ERROR_THEN_GET_RESPONSE;
 import static com.example.project.consts.WebConsts.JSONPLACEHOLDER_POSTS_URL;
 import static com.example.project.consts.WebConsts.JSONPLACEHOLDER_POSTS_URL_WITH_SLASH;
 import static com.example.project.consts.WebConsts.COMMENTS;
@@ -26,9 +29,11 @@ import static com.example.project.consts.WebConsts.COMMENTS;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
+
     private final RestTemplate restTemplate;
+
     @Override
-    @Cacheable({"postsCache"})
+    @Cacheable({POSTS_CACHE})
     public Post[] getPosts() throws BusinessException {
         ResponseEntity<Post[]> response;
         try {
@@ -40,7 +45,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Cacheable(cacheNames = {"postCache"}, key = "#id")
+    @Cacheable(cacheNames = {POST_CACHE}, key = "#id")
     public Post getPost(String id) throws BusinessException {
         String getRequestUrl = JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + id;
         ResponseEntity<Post> response;
@@ -53,7 +58,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Cacheable(cacheNames = {"postCommentsCache"}, key = "#id")
+    @Cacheable(cacheNames = {POST_COMMENTS_CACHE}, key = "#id")
     public Comment[] getPostComments(String id) throws BusinessException {
         String getRequestUrlComments = JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + id + COMMENTS;
         String getRequestUrlPost = JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + id;
@@ -80,7 +85,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @CachePut(cacheNames = {"postCache"}, key = "#id")
+    @CachePut(cacheNames = {POST_CACHE}, key = "#id")
     public Post updatePost(Post post, String id) throws BusinessException {
         String putURL = JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + id;
         HttpEntity<Post> request = new HttpEntity<>(post);
@@ -94,7 +99,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @CacheEvict(cacheNames = {"postCache"}, key = "#id")
+    @CacheEvict(cacheNames = {POST_CACHE}, key = "#id")
     public void deletePost(String id) {
         String putURL = JSONPLACEHOLDER_POSTS_URL_WITH_SLASH + id;
         restTemplate.delete(putURL);

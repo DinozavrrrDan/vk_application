@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.example.project.consts.WebConsts.NOT_FOUND;
+import static com.example.project.consts.ExceptionConsts.NOT_FOUND;
 
 @Service
 @AllArgsConstructor
