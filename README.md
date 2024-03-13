@@ -1,4 +1,5 @@
 # REST API для перенаправления запросов 
+ [![Java CI with Maven](https://github.com/DinozavrrrDan/vk_application/actions/workflows/maven.yml/badge.svg)](https://github.com/DinozavrrrDan/vk_application/actions/workflows/maven.yml)
  
 REST API для перенаправления запросов на https://jsonplaceholder.typicode.com/ с базовой авторизацией, ведением аудита действий, inmemmory cache для уменьшения числа запросов и использованием баз данных для хравнения аккаунтов и аудита.
 
