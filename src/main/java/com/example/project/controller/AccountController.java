@@ -26,7 +26,7 @@ public class AccountController {
 
     @PostMapping("/accounts")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<?> createAccount(@RequestBody Account account) {
+    public ResponseEntity<?> createAccount(@RequestBody Account account) throws BusinessException {
         return new ResponseEntity<>(accountService.createAccount(account), HttpStatus.CREATED);
     }
 

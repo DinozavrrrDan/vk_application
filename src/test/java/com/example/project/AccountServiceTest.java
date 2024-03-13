@@ -22,6 +22,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,7 +48,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void testCreateAccount() {
+    public void testCreateAccount() throws BusinessException {
         Account account = getTestAccount();
         when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
         when(accountRepository.save(Mockito.any(Account.class))).thenReturn(account);
@@ -56,6 +57,17 @@ public class AccountServiceTest {
 
         assertEquals("encodedPassword", createdAccount.getPassword());
     }
+
+    @Test
+    public void testCreateAccount_ThrowsException(){
+        Account account = getTestAccount();
+        when(accountRepository.findByName(any())).thenReturn(Optional.of(account));
+
+        assertThrows(BusinessException.class, () -> {
+           accountService.createAccount(account);
+        });
+    }
+
 
     @Test
     public void testGetAccounts() {

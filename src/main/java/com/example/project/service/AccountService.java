@@ -6,7 +6,8 @@ import com.example.project.model.account.Account;
 import java.util.List;
 
 public interface AccountService {
-    Account createAccount(Account account);
+    Account createAccount(Account account) throws BusinessException;
+
     List<Account> getAccounts();
 
     void deleteAccount(String id) throws BusinessException;
