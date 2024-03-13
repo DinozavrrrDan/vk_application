@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface AuditService {
     void save(AuditLog auditLog);
+
     List<AuditLog> getAllAuditLogs();
 }

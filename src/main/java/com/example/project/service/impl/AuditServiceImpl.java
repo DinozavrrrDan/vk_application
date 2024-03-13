@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AuditServiceImpl implements AuditService {
     private final AuditRepository auditRepository;
+
     @Override
     public void save(AuditLog auditLog) {
         auditRepository.save(auditLog);
